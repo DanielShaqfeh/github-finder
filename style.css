@@ -1,0 +1,186 @@
+
+/* Animated Gradient Background */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #000000, #1c1c1c, #0f2a43, #1c1c1c);
+  background-size: 400% 400%;
+  animation: gradientBG 30s ease infinite;
+}
+
+.inputForm {
+  margin-top: 40px;
+  position: sticky;
+  top: 0;
+  text-align: center;
+  background: #111;
+  padding: 50px;
+  border-radius: 10px;
+  border: 3px solid  #0f2a43;
+  width: 100%;
+  max-width: 400px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #ffffff; /* black text */
+}
+
+input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  margin-top: 15px;
+  width: 100%;
+  background-color: #222;
+  color: #eee;
+}
+
+input::placeholder {
+  color: #666;
+}
+
+input:focus {
+  outline:none;
+  background-color: #333;
+}
+
+
+/* Card Styles */
+.card {
+  margin-top: 20px;
+  position: sticky;
+  top: 0;
+  text-align: left;       
+  background: #111;
+  padding: 50px;
+  border-radius: 10px;
+  border: 3px solid  #0f2a43;
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  color: #eee;            
+  box-shadow: none;         
+  font-weight: 500;
+  gap: 40px; /* space between avatar and user-info */
+  align-items: center;    
+}
+
+/* Avatar and User Info Styles */
+.avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px #ffffff;
+  border: 2px solid #0f2a43;
+  flex-shrink: 0; /* prevent shrinking */
+}
+
+.user-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;               
+}
+
+.user-info h2 {
+  margin: 0;
+  color: #ffffff;
+  text-shadow: 0 0 6px #0f2a43;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+
+
+.user-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+  color: #ccc;
+  font-weight: 600;
+}
+
+.user-info ul li {
+  background: #0f2a43;  
+  padding: 10px 18px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 80px;
+  box-shadow: 0 0 10px #0f2a4388;
+}
+
+.user-info ul li strong {
+  color: #ffffff;
+  display: block;
+  font-size: 1.3rem;
+}
+
+#repos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.repo {
+  display: inline-block;
+  background: #0f2a43;
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 10px #0f2a4388;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 120px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo:hover {
+  background: #366ea3;
+  box-shadow: 0 0 15px #366ea3;
+}
+
+/* Error card */
+.error-card {
+  margin: 40px auto 0; /* top 40px, horizontally centered */
+  text-align: center;
+  background: #111;
+  padding: 30px;
+  border-radius: 10px;
+  border: 3px solid #0f2a43;
+  max-width: 400px;
+}
+
+/* Error message */
+.error-card h1 {
+  font-size: 20px;
+  color: red;
+  opacity: 0.9;
+  margin: auto;
+}
+
+/* Background Animation */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
