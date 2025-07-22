@@ -16,7 +16,7 @@ fetch.onload = () => {
 
   const getUserAndRepos = (name) => {
     const userRequest = axios(api + name);
-    const reposRequest = axios(api + name + "/repos?sort=created"); 
+    const reposRequest = axios(api + name + "/repos?sort=created");
 
     Promise.all([userRequest, reposRequest]) // Use Promise.all to handle both requests
       .then(([userResponse, reposResponse]) => {
@@ -25,20 +25,33 @@ fetch.onload = () => {
       })
       .catch((err) => {
         if (err.response) {
-            if (err.response.status === 404) {
-                showError("No profile with this username");
-            } 
-            else if (err.response.status === 403) {
-                showError("Number of requests limit exceeded. Please wait about 1 hour and try again.");
-            } 
-            else {
-                showError("An unexpected error occurred. Please try again later.");
-            }
-        }
-        else {
-            showError("Network error. Please check your connection and try again.");
+          if (err.response.status === 404) {
+            showError("No profile with this username");
+          } else if (err.response.status === 403) {
+            showError("Number of requests limit exceeded. Please wait about 1 hour and try again.");
+          } else {
+            showError("An unexpected error occurred. Please try again later.");
+          }
+        } else {
+          showError("Network error. Please check your connection and try again.");
         }
       });
+  };
+
+  const animateCount = (element, target) => {
+    let count = 0;
+    const duration = 1500; 
+    const stepTime = Math.max(Math.floor(duration / target), 20); // interval time
+    const increment = target / (duration / stepTime); //  increment per step
+
+    const timer = setInterval(() => {
+      count += increment;
+      if (count >= target) {
+        count = target;
+        clearInterval(timer);
+      }
+      element.innerText = Math.floor(count);
+    }, stepTime);
   };
 
   const userCard = (user) => {
@@ -55,14 +68,21 @@ fetch.onload = () => {
         <div class="user-info">
           <h2>${id}</h2>${info}
           <ul>
-            <li>${user.followers} <strong>Followers</strong></li>
-            <li>${user.following} <strong>Following</strong></li>
-            <li>${user.public_repos} <strong>Repos</strong></li>
+            <li><span class="count" data-target="${user.followers}">0</span> <strong>Followers</strong></li>
+            <li><span class="count" data-target="${user.following}">0</span> <strong>Following</strong></li>
+            <li><span class="count" data-target="${user.public_repos}">0</span> <strong>Repos</strong></li>
           </ul>
           <div id="repos"></div>
         </div>
       </div>`;
     main.innerHTML = cardElement;
+
+    // Animate all counters
+    const counters = main.querySelectorAll(".count");
+    counters.forEach((counter) => {
+      const target = +counter.getAttribute("data-target");
+      animateCount(counter, target);
+    });
   };
 
   const showError = (error) => {
